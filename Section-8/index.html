@@ -1,12 +1,94 @@
 <!-- 
 High-level
-Garbage-collected
-Interpreted or just-in-time compiled
-Multi-paradigm
-Prototype-based object-oriented
-Firs-class functions
-Dynamic
-Single-threaded
+Garbage-collected->cleaning the memory so we have to
+Interpreted or just-in-time compiled -> processor understand 0s and 1s, convert to meachin code
+Multi-paradigm->An approch and mindset of structureing code , which will direct your coding style and technique   , 1.Procedural programming,2.OOP,3.Functional programming
+Prototype-based object-oriented -> Array.prototype.push, Array.prototype.indexOf ->const arr=[1,2,3];arr.push(4);const haszero=arr.indexOf(0)>-1  
+Firs-class functions ->In a language with first-class functions, functions are simply treated as varables. We can pass them into other functions, and return them from functions.(passing a function into another function as an argument :first-class functions)
+Dynamic -> dynamically types
+Single-threaded -> Concurrency model:how the javascript engine handles multiple tasks happening at the same  time -> js runs in in one single thread, so it can only do one thing at a time ->sounds like it would block the single thread. however, we want non-blocking behaviour -> by using an event loop:takes long running tasks, executes them in the "background" and puts them back in the main thread once they are finished.
 Non-blocking event loop 
+
+What is javascript engine? -> Program that executes js code.  it contain a call satck and heap   call stack->where our code is executed   heap->Where object are stored
+compilation -> Entire code is converted into meachine code at once , and written to a binary file that can be executed by a computer. 
+source code->machinecode->program running
+interpretation->Interpreter runs through the source code and executes it line by line . source code->execution line by lne->program running
+Just-in-time(JIT) compilation:Entire code is converted into meachine code at once, then executed immediately
+
+parsing->compailation->execution
+runtime-> api->functionalities provided to the engine, accessible on window object 
+
+execution context->Environment in which a piece of javascript is executed. Stores all the necessary information for some code to be executed.
+Exactly one global execution context(EC):Default context, created for code that is not inside any function(top-level)
+one execution context per function:for each function call, a new execution context is created. 
+
+compilation->create if global execution context(for top-level code)->Execution of top-level code(inside global EC)->execution of functions and waiting for callbacks
+
+What's inside execution context? 
+1.Variable Environment->let , const and var declarations,->functions,->arguments object  
+2.Scope chain 
+3.this keyword 
+
+Scoping :How our program's variables are organized and accessed."Where do variable live?" or "Where can we access a certain variable, and where not?"
+Lexical scoping:Scoping is controlled by placement of functions and blocks in the code;
+scope:space or environment in which a cetain variable is declared(variable environment in case of functions).There is global scope , function scope, and block scope 
+scope of a variable :Region of our code where a certail variable can be accessed.
+
+Global scope -> const me="Jonas";const job='teacher';const year=1989;
+             -> outside of any function or block  ->Variables declared in global scope are accessible everywhere
+               const myName='Jonas';
+                function first(){
+                  const age=30;
+                  if(age>=30){const decade=3;var millenial=true;}
+                  function second(){
+                    const job='teacher';
+                    console.log(`${myName} is a ${age}-old ${job}`);
+                    // Jonas is a 30-old teacher
+                  }
+                  second(); 
+                }
+                first()
+
+Function scope->function calcAge(birthYear){const now=2037;const age=now-birthYear;return age;}console.log(now)//refernce error
+              ->variables are accessaible only inside function, NOT outside,  Also called local scope. 
+              
+Block scope -> if(yesr>=1981&&year<=1996){const millenial=true;const food='Avocado toast'}console.log(millenial)
+              ->Variables are accessible only inside block(block scoped)(HOWEVER, this only applies to let and const variables)
+              ->Function are also block scoped(only in strict mode)
+
+scope chain vs. Call stack
+
+scope chain->order in which functions are written in the code -.has nothing in which function were called !
+where can access variable
+
+// Hoisting in Javascript?
+Hoisting: Makes some types of variables accessible/usable in the code before they are actually declared."Variables lifted to the top of their scope".
+Before execution, code is scanned for variable declarations , and for each variable , a new property is created in the variable environment object.
+
+function declarations ->hoisted , initialvalue->Actual function , scope->Block
+var variables ->hoisted, undefined , function
+let and const variables -> not hoisted, undfined TDZ(temporary dead zone), block
+function expression and arrows -> Depends using var and let/const
+
+TDZ(temporary dead zone
+name='Jonas';if(myName==='Jonas'){
+console.log(`Jonas is a ${job)`};
+const age=2037-1989;
+console.log(age);
+const job='teacher';
+console.log(x)}
 -->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+  </script>
+</body>
+</html>
