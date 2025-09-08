@@ -62,7 +62,7 @@ scope chain->order in which functions are written in the code -.has nothing in w
 where can access variable
 
 // Hoisting in Javascript?
-Hoisting: Makes some types of variables accessible/usable in the code before they are actually declared."Variables lifted to the top of their scope".
+Hoisting: Makes some types of variables accessible/usable in the code before they are actually declared."Variables lifted to the top of their scope".  Using functions before actual declaration, var hoisting is just a byproduct.
 Before execution, code is scanned for variable declarations , and for each variable , a new property is created in the variable environment object.
 
 function declarations ->hoisted , initialvalue->Actual function , scope->Block
@@ -70,14 +70,46 @@ var variables ->hoisted, undefined , function
 let and const variables -> not hoisted, undfined TDZ(temporary dead zone), block
 function expression and arrows -> Depends using var and let/const
 
-TDZ(temporary dead zone
+TDZ(temporary dead zone)  -> why? ->Makes it easier to avoid and catch errors:accessing variable before declaration is bad practice and should  be avoided , Makes const variable actually work
 name='Jonas';if(myName==='Jonas'){
-console.log(`Jonas is a ${job)`};
+console.log(`Jonas is a ${job)`};          // ReferenceError:canot access 'job' before initialization 
 const age=2037-1989;
 console.log(age);
-const job='teacher';
-console.log(x)}
+const job='teacher';                      // ReferenceError:x is not defined 
+console.log(x)} 
+
+this keyword/variable:special variable that is created for every execution context(every function).Takes the value of(points to) the "owner" of the function in which the this keyword is used
+this is NOT static.It depends on how the function is called, and its value is only assigned when the function is actually called. 
+
+method-> this=<Object that is calling the method>
+  const jonas={
+  name:'Jonas',year:1989,calcAge:function(){return 2037-this.year}};jonas.calcAge();
+
+Simple function call->this=undefined
+Arrow functions-> this=<this of surrounding funtion(lexical this)>
+Event Listener->this=<DOM element that the handler is attached to>
+  new,call, apply, bind ->Later in the course
+
+
+memory mangement
+
+The memmory lifeCycle in Javascript
+How and where are variables created in javascript?
+->unlike other languages, memory is automatically managed by js behind the scens
+->Every value we created in JS goes through a memory lifecycle
+
+1.Allocate memory  ->let temp=23.7 ->Whenever we assign a value to a new variable , the engine automatically allocates(reserves) a piece of memmory to store the value
+2.Use memory ->temp=temp+5;round(temp) ->while code is running , the value is written , read and updated in the allocated piece of memmory
+3.Release memmory ->temp is removed from memory ->WHen no longer needed the value is deleted from memory to free up resources . The released memory is used for new values
+
+
+WHere is memory allocated?->Primitives->NUmber,string,Boolean,undefined,null , symbol,Bigint
+Objects->Object literals,arrays,functions,mant more
+
+Understanding Object refernces 
+dfgdgdfgdfgdfgdfgggfdgdgfdfgdfggfdfghfg
 -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +120,9 @@ console.log(x)}
 </head>
 <body>
   <script>
+    
 
   </script>
+  
 </body>
 </html>
