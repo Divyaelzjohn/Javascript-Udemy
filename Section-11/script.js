@@ -60,7 +60,7 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
-/*
+
 const displayMovements=function(movements){
 containerMovements.innerHTML='';
 // .textContent=0
@@ -76,10 +76,48 @@ containerMovements.innerHTML='';
       </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin',html)
-    containerMovements.insertAdjacentHTML('beforeend',html)
+    // containerMovements.insertAdjacentHTML('beforeend',html)
   });
 };
-displayMovements(account1.movements);*/
+displayMovements(account1.movements);
+
+const calcDisplayBalance=function(movements){
+  const balance=movements.reduce((acc,mov)=>acc+mov,0);
+  labelBalance.textContent=`${balance} €`
+}
+calcDisplayBalance(account1.movements)
+
+const calcDisplaySummary=function(movements){
+  const incomes = movements.filter(mov=>mov>0).reduce((acc,mov)=>acc+mov,0);
+  labelSumIn.textContent=`${incomes}€`
+
+  const out=movements.filter(mov=>mov<0).reduce((acc,mov)=>acc+mov,0);
+  labelSumOut.textContent=`${Math.abs(out)}€`
+
+  const interest=movements.filter(mov=>mov>0).map(deposit=>deposit*1.2/100).filter((int,i,arr)=>{
+    console.log(arr);
+    return int >= 1;
+  }).reduce((acc,int)=>acc+int,0);
+  labelSumInterest.textContent=`${interest}€`
+  // 
+}
+calcDisplaySummary(account1.movements)
+
+const createUsernames=function(accs){
+  accs.forEach(function(acc){
+    acc.username=acc.owner.toLowerCase().split(' ').map(name=> name[0]).join('');
+  });
+}
+// const user='Steven Thomas Williams';  //stw                              
+// const username=user.toLowerCase().split(' ').map(name=> name[0]).join('');
+                          
+// const createUsernames=function(user){const username=user.toLowerCase().split(' ').map(name=> name[0]).join(''); return username;}
+// console.log(createUsernames('Steven Thomas Williams'))
+
+createUsernames(accounts);  
+console.log(accounts);
+
+
 
 // console.log(containerMovements.innerHTML)
 
@@ -210,7 +248,7 @@ TEST DATA 1: Julia's data [3, 5, 2, 12, 7], Kate's data [4, 1, 15, 8, 3]
 TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 
 */
-
+/*
 const checkDogs=function(dogsJulia,dogsKate){
   const dogsJuliaCorrected=dogsJulia.slice();
   dogsJuliaCorrected.splice(0,1)
@@ -218,8 +256,144 @@ const checkDogs=function(dogsJulia,dogsKate){
   console.log(dogsJuliaCorrected)
 
   const dogs=dogsJuliaCorrected.concat(dogsKate)
-  console.log(dogs)
-}
-checkDogs([3,5,2,12,7],[4, 1, 15, 8, 3])
+  console.log(dogs);
 
-// 
+  // ("Dog number 1 is an adult, and is 5 years old") or a puppy ("Dog number 2 is still a puppy 🐶")
+  dogs.forEach(function(dog,i){
+    if(dog>=3){
+      console.log(`Dog number ${i+1} is an adult, and is ${dog} years old`)
+    }else{
+      console.log(`Dog number ${i+1} is still a puppy `)
+    }
+  })
+}
+checkDogs([3, 5, 2, 12, 7],[4, 1, 15, 8, 3])
+checkDogs([9, 16, 6, 8, 3],[10, 5, 6, 1, 4])
+*/
+
+/*
+///////////////////////////////////////
+// The map Method
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const eurToUsd=1.1;
+
+// const movementUSD=movements.map(function(mov){
+//   return mov*eurToUsd;
+// })
+const movementUSD=movements.map(mov=> mov*eurToUsd);
+
+console.log(movements)
+console.log(movementUSD)
+
+// const movementUSDfor=[];
+// for(const mov of movements) movementUSDfor.push(mov*eurToUsd);
+// console.log(movementUSDfor)
+
+
+const movementsDescriptions=movements.map((mov,i,arr)=>`Movement ${i+1}: You ${mov>0?'deposited':'withdrew'} ${Math.abs(mov)}`)
+console.log(movementsDescriptions)*/
+/*
+// filter
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const deposits = movements.filter(function(mov){
+  return mov>0;
+})
+console.log(movements)
+console.log(deposits)
+
+// const depositsFor=[];
+// for(const mov of movements) if(mov>0) depositsFor.push(mov)
+// console.log(deposits)
+
+const withdrawals=movements.filter(mov=> mov<0)
+console.log(withdrawals)*/
+/*
+// reduce method
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements);
+
+// acumulator -> SNOWBALL
+// const balance=movements.reduce(function(acc,cur,i,arr){
+//   console.log(`Iteration ${i}:${acc}`)  
+//   return acc+cur
+// },0);
+
+const balance=movements.reduce((acc,cur)=> acc+cur,0);
+console.log(balance);
+
+let balance2=0;
+for(const mov of movements) balance2+=mov
+console.log(balance2);
+
+// Maximum value
+
+const max=movements.reduce((acc,mov)=> {
+  if(acc>mov) return acc;
+  else return mov
+},movements[0])
+console.log(max);*/
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
+
+Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
+
+1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs that are at least 18 years old)
+3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages)
+4. Run the function for both test datasets
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+*/
+
+/*const calcAverageHumanAge=function(ages){
+  const humanAges=ages.map(age=>age<=2?2*age:16+age*4)
+  console.log(humanAges)
+  const adults=humanAges.filter(age=>age>=18)
+  console.log(humanAges)
+  console.log(adults)
+
+  // const average=adults.reduce((acc,age)=>acc+age,0)/adults.length;
+  const average=adults.reduce((acc,age,i,arr)=>acc+age/arr.length ,0);
+
+  // 2 3 .(2+3)/2=2.5 === 2/2+3/2=2.5
+  return average;
+}
+const avg1=calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+const avg2=calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4])
+
+console.log(avg1,avg2);*/
+
+
+/*
+///////////////////////////////////////
+// The Magic of Chaining Methods
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const eurToUsd=1.1;
+console.log(movements);
+
+  const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map((mov, i, arr) => {
+    // console.log(arr);
+    return mov * eurToUsd;
+  })
+  // .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD);
+*/
+
+/* 
+Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow function, and using chaining!
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+*/
+
+

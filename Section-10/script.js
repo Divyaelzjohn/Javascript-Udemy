@@ -119,7 +119,7 @@ greet('Hello')('Jonas');
 const greetArr=greeting=>name=>    console.log(`${greeting}${name}`);
 ('Hi')('Jonas');*/
 
-/*
+
 const lufthansa = {
   airline: 'Lufthansa',
   iataCode: 'LH',
@@ -148,41 +148,41 @@ const book = lufthansa.book;
 // book(23, 'Sarah Williams');   //this= undefined
 
 // Call method
-book.call(eurowings, 23, 'Sarah Williams');
-console.log(eurowings);
-
-book.call(lufthansa,239,'Mary Cooper')
-console.log(lufthansa);
-
-const swiss = {
-  airline: 'EuSwiss Air Lines',
-  iataCode: 'LX',
-  bookings: [],
-};
-book.call(swiss, 583, 'Sarah Williams');
-console.log(swiss);
-
-
-// Apply method ->argument array aayi pass cheyyum
-const flightData=[583,'George Cooper']
-book.apply(swiss,flightData)
-console.log(swiss);
-
-book.call(swiss,...flightData);
-
-//Bind method -> new function return cheyyum, pinne aa new function call cheyyam
-
 // book.call(eurowings, 23, 'Sarah Williams');
+// console.log(eurowings);
 
-const bookEW=book.bind(eurowings);
-const bookLH=book.bind(lufthansa);
-const bookLX=book.bind(swiss);
+// book.call(lufthansa,239,'Mary Cooper')
+// console.log(lufthansa);
 
-bookEW(23,"Steaven Williams");
+// const swiss = {
+//   airline: 'EuSwiss Air Lines',
+//   iataCode: 'LX',
+//   bookings: [],
+// };
+// book.call(swiss, 583, 'Sarah Williams');
+// console.log(swiss);
 
-const bookEW23=book.bind(eurowings,23);
-bookEW23('Jonas Schmedtmann');
-bookEW23("Marths Copper");
+
+// // Apply method ->argument array aayi pass cheyyum
+// const flightData=[583,'George Cooper']
+// book.apply(swiss,flightData)
+// console.log(swiss);
+
+// book.call(swiss,...flightData);
+
+// //Bind method -> new function return cheyyum, pinne aa new function call cheyyam
+
+// // book.call(eurowings, 23, 'Sarah Williams');
+
+// const bookEW=book.bind(eurowings);
+// const bookLH=book.bind(lufthansa);
+// const bookLX=book.bind(swiss);
+
+// bookEW(23,"Steaven Williams");
+
+// const bookEW23=book.bind(eurowings,23);
+// bookEW23('Jonas Schmedtmann');
+// bookEW23("Marths Copper");
 
 // with Event Listeners
 lufthansa.planes = 300;
@@ -199,26 +199,26 @@ document
   .querySelector('.buy')
   .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
 
-//Partial application 
-// const bookEW23=book.bind(eurowings,23);bookEW23('Jonas Schedtmann);bookEW23('Martha cooper`)  ->  ivide flightNum=23 already present ayirikku,. Ini passenger name mathram koduthal mathy
-//partial application with out this
-const addTax=(rate,value)=>value+value*rate;
-console.log(addTax(0.1,200));
+// //Partial application 
+// // const bookEW23=book.bind(eurowings,23);bookEW23('Jonas Schedtmann);bookEW23('Martha cooper`)  ->  ivide flightNum=23 already present ayirikku,. Ini passenger name mathram koduthal mathy
+// //partial application with out this
+// const addTax=(rate,value)=>value+value*rate;
+// console.log(addTax(0.1,200));
 
-const addVAT=addTax.bind(null, 0.23)
-// addVAT=value=>value+value*0.23;
+// const addVAT=addTax.bind(null, 0.23)
+// // addVAT=value=>value+value*0.23;
 
-console.log(addVAT(100));
-console.log(addVAT(23));
+// console.log(addVAT(100));
+// console.log(addVAT(23));
 
-const addTaxRate=function(rate){
-  return function(value){
-    return value+value*rate;
-  }
-}
-const addVAT2=addTaxRate(0.23);
-console.log(addVAT2(100));
-console.log(addVAT2(23));*/
+// const addTaxRate=function(rate){
+//   return function(value){
+//     return value+value*rate;
+//   }
+// }
+// const addVAT2=addTaxRate(0.23);
+// console.log(addVAT2(100));
+// console.log(addVAT2(23));
 
 /*const airIndia = {
   airline: 'Air India',
