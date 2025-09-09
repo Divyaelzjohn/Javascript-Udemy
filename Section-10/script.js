@@ -65,7 +65,18 @@ const newPassport = function (person) {
 newPassport(jonas);
 checkIn(flight, jonas);
 */
+// Higher order function?a higher-order function[HOF] ia a function that takes another function as an argumnets(callback),Or returns another function
 
+/* // Remove spaces + lowercase
+function oneWord(str) {
+  return str.replace(/\s+/g, '').toLowerCase();
+}
+// Make first word uppercase
+function upperFirstWord(str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+}
+*/
 /*
 const oneWord = function (str) {
   return str.replace(/ /g, '').toLowerCase();
@@ -74,7 +85,8 @@ const upperFirstWord = function (str) {
   const [first, ...others] = str.split(' ');
   return [first.toUpperCase(), ...others].join(' ');
 };
-//Higher-order function
+//Higher-order function- we pass fn(a function) as an argument.Inside transformer, we call fn(str). fn could be any function that transforms a string
+//transformer ->we don't call upppperFIrstWOrd() or oneword() directly.We just pass them as arguments-> transformer calls them later
 const transformer=function(str,fn){
   console.log(`Original string:${str}`)
   console.log(`Transformed string:${fn(str)}`)
@@ -133,7 +145,7 @@ const eurowings = {
 const book = lufthansa.book;
 
 // Does NOT work
-// book(23, 'Sarah Williams');
+// book(23, 'Sarah Williams');   //this= undefined
 
 // Call method
 book.call(eurowings, 23, 'Sarah Williams');
@@ -151,14 +163,15 @@ book.call(swiss, 583, 'Sarah Williams');
 console.log(swiss);
 
 
-// Apply method
+// Apply method ->argument array aayi pass cheyyum
 const flightData=[583,'George Cooper']
 book.apply(swiss,flightData)
 console.log(swiss);
 
 book.call(swiss,...flightData);
 
-//Bind method
+//Bind method -> new function return cheyyum, pinne aa new function call cheyyam
+
 // book.call(eurowings, 23, 'Sarah Williams');
 
 const bookEW=book.bind(eurowings);
@@ -186,9 +199,9 @@ document
   .querySelector('.buy')
   .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
 
-
-//Partial application
-
+//Partial application 
+// const bookEW23=book.bind(eurowings,23);bookEW23('Jonas Schedtmann);bookEW23('Martha cooper`)  ->  ivide flightNum=23 already present ayirikku,. Ini passenger name mathram koduthal mathy
+//partial application with out this
 const addTax=(rate,value)=>value+value*rate;
 console.log(addTax(0.1,200));
 
@@ -207,7 +220,34 @@ const addVAT2=addTaxRate(0.23);
 console.log(addVAT2(100));
 console.log(addVAT2(23));*/
 
+/*const airIndia = {
+  airline: 'Air India',
+  iataCode: 'AI',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  }
+};
+airIndia.book(101,'Divya');airIndia.book(202,'Rahul');console.log(airIndia.bookings);
 
+const book=airIndia.book;
+const indigo = {
+  airline: 'Indigo',
+  iataCode: '6E',
+  bookings: []
+};
+book.call(indigo,303,'Anjali');
+book.call(indigo,404,'Ravi');console.log(indigo.bookings)
+
+const spiceJet = {
+  airline: 'SpiceJet',
+  iataCode: 'SJ',
+  bookings: []
+};
+const flightData=[505,'Neha Sharma']
+book.apply(spiceJet,flightData);
+console.log(spiceJet.bookings);*/
 
 ///////////////////////////////////////
 // Coding Challenge #1
@@ -239,7 +279,6 @@ BONUS: Use the 'displayResults' method to display the 2 arrays in the test data.
 
 BONUS TEST DATA 1: [5, 2, 3]
 BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
-
 */
 /*
 const poll = {
@@ -301,7 +340,7 @@ console.log(isPrivate)
 console.log(notPrivate)
 */
 
-const secureBooking=function(){
+/*const secureBooking=function(){
   let passengerCount=0;
 
   return function(){
@@ -310,5 +349,67 @@ const secureBooking=function(){
   }
 }
 const booker=secureBooking();
+booker()*/
+
+// secureBooking() call cheyyumbol local variale pasengerCOunt=0 create cheyyum.return function()->inner function return cheyyum . SecureBooking() execution context stack-il ninn purathakum. Satharanayayi variables(passengerCOunt) vanish cheyyanm. pakshe inner function(booker) create cheythappol ath closure vazhi parent scope-le variables-ne carry cheythu.booker() call cheyymbol,ath passengerCount increment chyeyunnu karanm ath closure-il safe ayi store chythirikkunnu
 
 // global scope securebooking, passegercount=0secureBooking =<f> what execution enterance memmory 
+/*
+// Example 1
+let f;
+const g=function(){
+  const a=23;
+  f=function(){
+    console.log(a*2)
+  }
+}
+
+const h=function(){
+  const b=777;
+  f=function(){
+    console.log(b*2)
+  }
+}
+
+g();
+f();
+console.dir(f)
+// Reassigneding f function
+h();
+f();
+console.dir(f)
+
+// Example 2
+const boardPassengers=function(n, wait){
+  const perGroup=n/3;
+  setTimeout(function(){
+    console.log(`We are now boarding all ${n} passengers`)
+    console.log(`There are 3 groups,each with ${perGroup} passengers`)
+  },wait*1000)
+  console.log(`Will start boarding in ${wait} seconds`)
+}
+const perGroup=1000;
+boardPassengers(180,3)*/
+
+
+// Coding Challenge #2
+
+/* 
+This is more of a thinking challenge than a coding challenge 🤓
+
+Take the IIFE below and at the end of the function, attach an event listener that changes the color of the selected h1 element ('header') to blue, each time the BODY element is clicked. Do NOT select the h1 element again!
+
+And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed, and what that means for the variables involved in this example.
+
+*/
+
+(function(){
+  const header=document.querySelector('h1');
+  header.style.color='red'
+
+  document.querySelector('body').addEventListener('click',function(){
+      header.style.color='blue'
+  })
+})();
+
+// why did its work? ->  bithplace remembers  header backpack try to explain 

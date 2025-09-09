@@ -106,8 +106,15 @@ How and where are variables created in javascript?
 WHere is memory allocated?->Primitives->NUmber,string,Boolean,undefined,null , symbol,Bigint
 Objects->Object literals,arrays,functions,mant more
 
+How is memory freed up after we no longer need a value? -> 
+callstack -> Variable environment is simply deleted when EC pops off stack
+Heap-> Garbage collection(central memory mangement tool)
+MARK-AND-SWEEP ALgorithm 
+1.Mark:Mark objects that are reachable from a root as "alive" 
+2.Sweep
+ :Delete un-marked (unreachable) objects and reclaim memory for future allocations 
+ Memory leak:When objects that are no longer needed are incorrecly still reachable, and there fore not being garbage collected
 Understanding Object refernces 
-dfgdgdfgdfgdfgdfgggfdgdgfdfgdfggfdfghfg
 -->
 
 
@@ -119,10 +126,7 @@ dfgdgdfgdfgdfgdfgggfdgdgfdfgdfggfdfghfg
   <title>Document</title>
 </head>
 <body>
-  <script>
-    
-
-  </script>
+  <script src="script.js"></script>
   
 </body>
 </html>

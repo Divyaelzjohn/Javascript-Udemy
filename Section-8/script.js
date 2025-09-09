@@ -158,3 +158,69 @@ calcAge(1991);
     }
     addArrow(2,5,8);
 */
+/*
+const jessica={
+  firstName:'Jessica',
+  lastName:'Williams',
+  age:27,
+};
+
+function marryPerson(originalPerson,newLastName){
+ originalPerson.lastName=newLastName;
+ return originalPerson;
+}
+const marriedJessica=marryPerson(jessica,'Davis')
+
+// const marriedJessica=jessica;
+// marriedJessica.lastName='Davis'
+
+console.log('Before:',jessica)
+console.log('After:',marriedJessica)
+
+// jessica={x:23}
+
+const jessica2={
+  firstName:'Jessica',
+  lastName:'Williams',
+  age:27,
+  familiy:['Alice','Bob']
+};
+
+//Shallow copy
+const jessicaCopy = {...jessica2};
+jessicaCopy.lastName='Davis';
+
+// console.log(jessica2,jessicaCopy);
+// jessicaCopy.familiy.push('Mary');
+// jessicaCopy.familiy.push('John');
+
+
+// console.log('Before:',jessica2)
+// console.log('After:',jessicaCopy)
+
+// Deep copy/clone
+const jessicaClone= structuredClone(jessica2);
+jessicaClone.familiy.push('Mary');
+jessicaClone.familiy.push('John');
+
+
+console.log('Original:',jessica2)
+console.log('Clone:',jessicaCopy)
+*/
+
+// Closure prototypal inheritance event loop 
+// 
+
+
+
+let myName="Divya"
+function outer(){
+  let age=25;
+  function inner(){
+    console.log(myName);
+    console.log(age)
+  }
+  inner()
+}
+outer()
+
