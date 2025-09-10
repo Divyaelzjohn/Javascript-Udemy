@@ -144,10 +144,11 @@ const eurowings = {
 
 const book = lufthansa.book;
 
-// Does NOT work
-// book(23, 'Sarah Williams');   //this= undefined
 
-// Call method
+// Does NOT work
+// book(23, 'Sarah Williams');   // now book is just a regular function not attached to any object. When you call it, there's no object before the dot. In strict mode-> this=undefined. In non-strict mode this =window(browser global object) Since window has no airline or iateCode , you get ubdefibed
+
+// Call method  ->lets you manually set this. Now this=eurowings, so everything works
 // book.call(eurowings, 23, 'Sarah Williams');
 // console.log(eurowings);
 
@@ -173,6 +174,7 @@ const book = lufthansa.book;
 // //Bind method -> new function return cheyyum, pinne aa new function call cheyyam
 
 // // book.call(eurowings, 23, 'Sarah Williams');
+// 
 
 // const bookEW=book.bind(eurowings);
 // const bookLH=book.bind(lufthansa);

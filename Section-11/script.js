@@ -61,12 +61,13 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements=function(movements){
+const displayMovements=function(movements, sort=false){
 containerMovements.innerHTML='';
 // .textContent=0
+// (make shallow copy of the movements array )
+const movs =  sort? movements.slice().sort((a,b)=> a-b):movements;
 
-  movements.forEach(function(mov,i){
-
+  movs.forEach(function(mov,i){
     const type=mov>0?'deposit':'withdrawal'
 
     const html=`
@@ -127,13 +128,13 @@ console.log(accounts);
 
 const updateUI=function(acc){
   // Dispay movements
-  displayMovements(currentAccount.movements)
+  displayMovements(acc.movements)
  
   // Display balance
-  calcDisplayBalance(currentAccount)
+  calcDisplayBalance(acc)
 
   // Display summary
-  calcDisplaySummary(currentAccount)
+  calcDisplaySummary(acc)
 }
 
 // Event handlers
@@ -146,14 +147,14 @@ btnLogin.addEventListener('click',function(e){
   currentAccount = accounts.find(acc=>acc.username===inputLoginUsername.value)
   console.log(currentAccount) 
 
-  if(currentAccount?.pin===Number(inputLoginPin.value))
+  if(currentAccount?.pin===Number(inputLoginPin.value)){
   // Display UI and message
   labelWelcome.textContent=`Welcome back, ${currentAccount.owner.split(' ')[0]}`;
   containerApp.style.opacity=100
 
   // Clear input fields
-  inputLoginUsername.value=inputLoginPin.value='';
-  inputLoginPin.blur();
+  inputLoginUsername.value=inputLoginPin.value='';     //clear fileds after login
+  inputLoginPin.blur();       //remove focused cursor
 
   /*// Dispay movements
   displayMovements(currentAccount.movements)
@@ -167,10 +168,8 @@ btnLogin.addEventListener('click',function(e){
   // console.log('LOGIN')
 
   // UpdateUI
-  updateUI(currentAccount)
+  updateUI(currentAccount)}
 })
-
-// index,
 
 btnTransfer.addEventListener('click',function(e){
   e.preventDefault();
@@ -192,6 +191,46 @@ btnTransfer.addEventListener('click',function(e){
     }
 })
 
+btnLoan.addEventListener('click',function(e){
+  e.preventDefault();
+
+  const amount=Number(inputLoanAmount.value);
+
+  if(amount>0 && currentAccount.movements.some(mov=> mov>= amount*0.1)){
+    // Add movement
+    currentAccount.movements.push(amount);
+
+    // Update UI
+    updateUI(currentAccount)
+  }
+  inputLoanAmount.value=''
+})
+
+// Close account ->find index method
+
+btnClose.addEventListener('click',function(e){
+  e.preventDefault();
+ 
+  if(inputCloseUsername.value===currentAccount.username && Number(inputClosePin.value)===currentAccount.pin){
+    const index=accounts.findIndex(acc=>acc.username===currentAccount.username)
+    console.log(index)
+    // Delete account
+     accounts.splice(index, 1);
+    // .indexOf(23)
+
+    // Hide UI
+    containerApp.style.opacity = 0
+  }
+   inputCloseUsername.value=inputClosePin.value=''
+})
+// this variable remembers the current state false-> not sorted, true->sorted
+let sorted = false;
+btnSort.addEventListener('click',function(e){
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);    //The second argument is !sorted-> the opposite of the currrent state  first click-> sorted=false !sorted=true,  second click sorted=true, so !sorted=false 
+  sorted=!sorted;
+})
+
 // console.log(containerMovements.innerHTML)
 
 /////////////////////////////////////////////////
@@ -199,7 +238,7 @@ btnTransfer.addEventListener('click',function(e){
 // LECTURES
 
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -497,3 +536,245 @@ console.log(accounts)
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account);
 */
+///////////////////////////////////////////////////////////////////
+// The new findLast and findLastIndex Methods
+// find->Searches from the end-> start and return the matching element
+// findLastIndex()-> Searches from the end -> start and returns the matching index
+/*const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements);
+const lastWthdrawal=movements.findLast(mov=>mov<0);
+console.log(lastWthdrawal)
+
+// 'Your latest large movement was X movements ago'
+const latestLargeMovementIndex=movements.findLastIndex(mov=>Math.abs(mov)>2000);
+console.log(latestLargeMovementIndex)  // index of latest large movements 
+console.log(`Your latest large movement was ${movements.length-latestLargeMovementIndex} movements ago`) 
+
+
+console.log(movements.includes(-130))  */
+// --------------includes->checks if an array contain a specific value(exact match)
+
+////////////////////////////////////////////////////////////////////
+
+//-----------some()->checks if at least one element in the array satisfies a condition, return true or false  
+/*
+btnLoan.addEventListener('click', function(e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (
+    amount > 0 &&
+    currentAccount.movements.some(mov => mov >= amount * 0.1)
+  ) {
+    currentAccount.movements.push(amount);
+    updateUI(currentAccount);
+  }
+
+  inputLoanAmount.value = '';
+});
+
+if biggest deposite = 3000 -> you can request up to 300000, if you request 400000-> denied
+*/
+// ----------------every -> cheks if all elements in the array satisfy a condition , returns true only if evry elemnt passed the test
+/* 
+console.log(movements.every(mov=> mov>0))   // false -> because there are withdrawals(negative numbers)
+const account4={movements:[400,1000,700,50,90]};
+console.log(account4.movements.every(mov=>mov>0)) */
+//
+
+// some and every
+/*const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements);
+
+// EQUALITY
+console.log(movements.includes(-130));
+
+// SOME:CONDITION
+console.log(movements.some(mov=>mov===-130));
+
+const anyDeposits = movements.some(mov=>mov>0)
+console.log(anyDeposits);
+
+// EVERY
+console.log(movements.every(mov=>mov>0)); 
+console.log(account4.movements.every(mov=>mov>0)); 
+
+// Separate Callvback
+const deposit = mov=>mov>0;
+console.log(movements.some(deposit))
+console.log(movements.every(deposit))
+console.log(movements.filter(deposit))*/
+
+///////////////////////////////////////////////////////////////////
+// -------------------------flat- removes nesting.By default , it goes 1 level deep 
+
+// flat and flatmap
+/*const arr=[[1,2,3],[4,5,6],7,8]
+console.log(arr.flat());
+
+const arrDeep=[[[1,2],3],[4,[5,6]],7,8]
+console.log(arrDeep.flat(2))
+
+// const accountMovements=accounts.map(acc=>acc.movements)
+// console.log(accountMovements)
+// const allMovements=accountMovements.flat()
+// console.log(allMovements);
+// const overalBalance=allMovements.reduce((acc,mov)=>acc+mov,0)
+
+//flat
+const overalBalance=accounts.map(acc=>acc.movements).flat().reduce((acc,mov)=>acc+mov,0)
+console.log(overalBalance);
+
+//flat Map(map()+flat(1)one step)  -> shorycut for map+flat(1 level), faster and cleaner
+const overalBalance2=accounts.flatMap(acc=>acc.movements).reduce((acc,mov)=>acc+mov,0)
+console.log(overalBalance);  
+*/
+///////////////////////////////////////
+// Coding Challenge #4
+
+/*
+This time, Julia and Kate are studying the activity levels of different dog breeds.
+
+YOUR TASKS:
+1. Store the the average weight of a "Husky" in a variable "huskyWeight"
+2. Find the name of the only breed that likes both "running" and "fetch" ("dogBothActivities" variable)
+3. Create an array "allActivities" of all the activities of all the dog breeds
+4. Create an array "uniqueActivities" that contains only the unique activities (no activity repetitions). HINT: Use a technique with a special data structure that we studied a few sections ago.
+5. Many dog breeds like to swim. What other activities do these dogs like? Store all the OTHER activities these breeds like to do, in a unique array called "swimmingAdjacent".
+6. Do all the breeds have an average weight of 10kg or more? Log to the console whether "true" or "false".
+7. Are there any breeds that are "active"? "Active" means that the dog has 3 or more activities. Log to the console whether "true" or "false".
+
+BONUS: What's the average weight of the heaviest breed that likes to fetch? HINT: Use the "Math.max" method along with the ... operator.
+
+TEST DATA:
+*/
+/*
+const breeds = [
+  {
+    breed: 'German Shepherd',
+    averageWeight: 32,
+    activities: ['fetch', 'swimming'],
+  },
+  {
+    breed: 'Dalmatian',
+    averageWeight: 24,
+    activities: ['running', 'fetch', 'agility'],
+  },
+  {
+    breed: 'Labrador',
+    averageWeight: 28,
+    activities: ['swimming', 'fetch'],
+  },
+  {
+    breed: 'Beagle',
+    averageWeight: 12,
+    activities: ['digging', 'fetch'],
+  },
+  {
+    breed: 'Husky',
+    averageWeight: 26,
+    activities: ['running', 'agility', 'swimming'],
+  },
+  {
+    breed: 'Bulldog',
+    averageWeight: 36,
+    activities: ['sleeping'],
+  },
+  {
+    breed: 'Poodle',
+    averageWeight: 18,
+    activities: ['agility', 'fetch'],
+  },
+];
+// 1.
+const huskyWeight=breeds.find(breed=> breed.breed==="Husky").averageWeight;     //breeds.find(...) searches the brreds array and return the first object where the callback is true. The callback checks breed.breed==="Husky"
+console.log(huskyWeight);
+
+// 2.
+const dogBothActivities=breeds.find(breed=> breed.activities.includes('fetch') && breed.activities.includes('running')).breed;  
+console.log(dogBothActivities);
+
+//3
+const allActivities=breeds.map(breed=>breed.activities).flat()
+// const allActivities=breeds.flatMap(breed=>breed.activities)
+console.log(allActivities);
+
+
+// 4
+const uniqueActivities=[...new Set(allActivities)];
+console.log(uniqueActivities);
+
+// 5
+const swimmingAdjacent=[
+  ...new Set(
+    breeds.filter(breed=>breed.activities.includes('swimming')).flatMap(breed=>breed.activities).filter(activitiy=>activitiy!=='swimming')   // remove the swmming entries( we only want the other activities these swimmers like)
+  )
+]
+console.log(swimmingAdjacent);
+
+// 6
+console.log(breeds.every(breed=>breed.averageWeight>10))
+
+// 7
+console.log(breeds.some(breed=>breed.activities.length>=3))
+
+// BONUS
+const fetchWeights = breeds
+  .filter(breed => breed.activities.includes('fetch'))
+  .map(breed => breed.averageWeight);
+
+const heaviestFetchBreed = Math.max(...fetchWeights);
+
+console.log(fetchWeights);
+console.log(heaviestFetchBreed);
+*/
+/////////////////////////////////////////////////////////
+// Sorting
+/*
+   // Strings
+    const owners=['Jonas','Zach','Adam','Martha'];
+    console.log(owners.sort())
+    console.log(owners)
+
+    // Numbers
+    const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+    // console.log(movements.sort())
+    console.log(movements)
+
+    // return<0,A,B (keep order)
+    // return>0,B,A (switch order)
+
+    // Ascending -> working
+    // movements.sort((a,b)=>{
+    //   if(a>b) return 1;
+    //   if(a<b) return -1;
+    // });
+    movements.sort((a,b)=>a-b);
+    console.log(movements)
+
+    // Desending
+    // movements.sort((a,b)=>{
+    //   if(a>b) return -1;
+    //   if(a<b) return 1;
+    // })
+    movements.sort((a,b)=>b-a);
+    console.log(movements)
+*/
+
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+  console.log(movements);
+  const groupedMovements= Object.groupBy(movements,movements=>movements>0?'deposite':'withdrawals');
+  console.log(groupedMovements)
+
+  const groupedByActivity=Object.groupBy(accounts,account=>{
+    const movementCount=account.movements.length;
+
+    if(movementCount>=8) return 'vary active';
+    if(movementCount>=4) return 'active';
+    if(movementCount>=1) return 'moderate';
+    return 'inactive'
+  })
+console.log(groupedByActivity)
+
