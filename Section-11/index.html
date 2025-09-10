@@ -124,30 +124,13 @@
     </footer> -->
 
     <!-- <script src="script.js"></script> -->
-     <script>
-      const calcAverageHumanAge=function(ages){
-      const humanAges=ages.map(age=>age<=2?2*age:16+age*4)
-      console.log(humanAges)
-      const adults=humanAges.filter(age=>age>=18)
-      console.log(humanAges)
-      console.log(adults)
-
-      const average=adults.reduce((acc,age,i,arr)=>acc+age/arr.length ,0);
-
-      return average;
-    }
-
-    const calcAverageHumanAges=ages=>ages.map(age=>age<=2?2*age:16+age*4).filter(age=>age>=18).reduce((acc,age,i,arr)=>acc+age/arr.length ,0);
-
-    const avg1=calcAverageHumanAges([5, 2, 4, 1, 15, 8, 3]);
-    const avg2=calcAverageHumanAges([16, 6, 10, 5, 6, 1, 4])
-    console.log(avg1,avg2);
-    </script>
+     <script src="script.js"></script>
 <!--
 MAP     ->  map return a new array containing the results of applying an operation on all original     array elements
 FILTER  -> filter returns a new array containig the array elements that passed a specified test condition
 REDUCE  -> reduce boild("reduces") all array elements down to one single value(e.g. adding all elements together)
-  -->
+-->
 
-  </body>
-  </html>
+
+</body>
+</html>
