@@ -10,6 +10,7 @@ const account1 = {
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
+  type:'premium'
 };
 
 const account2 = {
@@ -17,6 +18,7 @@ const account2 = {
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
+  type:'standard'
 };
 
 const account3 = {
@@ -24,6 +26,7 @@ const account3 = {
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
+  type:'premium'
 };
 
 const account4 = {
@@ -31,6 +34,7 @@ const account4 = {
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
+  type:'basic'
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -761,13 +765,23 @@ console.log(heaviestFetchBreed);
     movements.sort((a,b)=>b-a);
     console.log(movements)
 */
-
-
+/*
+// Array grouping in javascript  -> the method is Object.groupedBt(array,callback)  -> array:the array you want to group, callback:decides which group each item belongs to(returns a key values)
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
   console.log(movements);
   const groupedMovements= Object.groupBy(movements,movements=>movements>0?'deposite':'withdrawals');
   console.log(groupedMovements)
 
+// const groupedMovements = Object.groupBy(movements, movement => {
+//   if (movement > 0) return 'deposits';
+//   else return 'withdrawals';
+// });                                        
+//  Deposits are grouped together, withdrawals grouped separately.
+// Notice the keys (deposits, withdrawals) come from what the callback returned.  
+
+console.log(groupedMovements);
+
+// Grouping by account activity
   const groupedByActivity=Object.groupBy(accounts,account=>{
     const movementCount=account.movements.length;
 
@@ -778,3 +792,292 @@ console.log(heaviestFetchBreed);
   })
 console.log(groupedByActivity)
 
+// const groupedAccounts=Object.groupBy(accounts,account=>account.type);
+// console.log(groupedAccounts);
+
+// Grouped by object activity
+const groupedAccounts=Object.groupBy(accounts,({type})=>type);
+console.log(groupedAccounts);
+*/
+/////////////////////////////////////////////////////////////////////////
+// array and fill 
+/*
+const arr=[1,2,3,4,5,6,7];
+console.log(new Array(1,2,3,4,5,6,7))
+
+// Empty array with fill method
+// Array constructor function
+const x=new Array(7);
+console.log(x)
+
+console.log(x.map(()=>5))     //[empty × 7]
+
+// x.fill(1);
+x.fill(1,3,5);         //(7) [empty × 3, 1, 1, empty × 2]
+console.log(x);
+
+arr.fill(23,4,6)
+console.log(arr);     // [1, 2, 3, 4, 23, 23, 7]
+
+// array.from
+const y=Array.from({length:7},()=>1)
+console.log(y);
+
+// we can use cur -> _(under score)
+const z=Array.from({length:7},(_,i)=>i+1)
+console.log(z);
+
+const movementsUI=Array.from(document.querySelectorAll('.movements__value'));
+console.log(movementsUI);
+
+labelBalance.addEventListener('click',function(){
+  const movementsUI=Array.from(document.querySelectorAll('.movements__value'),
+  el=>Number(el.textContent.replace('€',''))
+  );
+  console.log(movementsUI);
+
+  const movementsUI2=[...document.querySelectorAll('.movement__value')]
+})*/
+
+///////////////////////////////////////////////////////////////////////
+// Non-Destructuring Alternatives:toReverses,toSorted, toSpliced, with
+/*const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements)                        //[200, 450, -400, 3000, -650, -130, 70, 1300]
+
+// const reversedMov=movements.reverse()      //[1300, 70, -130, -650, 3000, -400, 450, 200]
+// after revers the movemets still like reversed
+
+const reversedMov=movements.toReversed()      //[1300, 70, -130, -650, 3000, -400, 450, 200]
+console.log(reversedMov)
+console.log(movements)                        //[200, 450, -400, 3000, -650, -130, 70, 1300]
+
+// toSorted(sort) , toSpliced(splice)
+// movements[1]=2000
+
+const newMovements=movements.with(1,2000)
+console.log(newMovements);
+
+console.log(movements)  */
+
+
+  // To mutate orginal
+  /*
+  // Add to orginal 
+    -> .push(end)
+    -> .unshift(start)
+  // Remove from orginal
+    -> .pop(end)
+    -> .shift(start)
+    -> .splice(any)
+  // Others
+    -> .reverse
+    -> .sort
+    -> .fill
+  */
+
+// a new array based on orginal
+  /*
+  // Same length as orginal
+    -> .map(loop)
+  // Filtered using condition
+    -> .filter
+  // Taking portion of orginal
+    -> .slice
+  // With one item replaced
+    -> .with
+  // Flatttenedn
+    -> .flat
+    -> .flatMap
+  //Join two arrays
+    -> .concat
+    // Non-destructive version
+  // Reversed
+    -> .toReversed
+  // Sorted
+    -> .toSOrted
+  // with deleted items
+    -> .toSpliced
+  */
+
+// An array index
+  /*
+  // Based on value
+    -> .indexOf
+  // Based on test condition
+    -> .findIndex
+    -> .findLastIndex
+  */
+
+// An array element
+  /*
+  // Based on test condition
+    -> .find
+    -> .findLast
+  // Based on position
+    -> .at
+  */
+
+// Know if array includes
+  /*
+  // Based on value
+    -> .includes
+  // Based on test condition
+    -> .some
+    -> .every
+  */
+
+// A new string
+  /*
+  // Based on separator
+    -> .join
+  */
+
+// To transform to value
+  /*
+  // Based on accumulator
+    -> .reduce -(boil down array to single value of any type:number, string, boolean, or even new array or object)
+  */
+
+// To just loop array
+  /*
+  // Based on callback
+    -> .forEach -(Does not create a new array, just loops over it)
+  */
+
+// Grouping an array by categories  -> Object.groupBy
+// Creating a new array from scratch ->Array.from
+// Creating a new array from scratch  with n empty positions(use together with .fill method ->new Array(n))
+// Joining 2 or more arrays: -> [...arr1,...arr2]
+// Creating a new array containing unique values from arr -> [...new Set(arr)]
+// Creating a new array containing unique elements that are present in both arr1 and arr2 ->[new Set(arr1).intersection(new Set(arr2))]
+
+
+ /*   
+/////////////////////////////////////////////////////////////////////////////////
+// Array methods Practice
+// 1.
+const bankDepositeSum=accounts.flatMap(acc=>acc.movements).filter(mov=>mov>0).reduce((sum,cur)=>sum+cur, 0);
+console.log(bankDepositeSum)
+
+// 2.
+// const numDeposite1000 = accounts.flatMap(acc=>acc.movements).filter(mov=>mov>=1000).length;
+// const numDeposite1000 = accounts.flatMap(acc=>acc.movements).reduce((count,cur)=> cur>=1000?count+1:count,0)
+const numDeposite1000 = accounts.flatMap(acc=>acc.movements).reduce((count,cur)=> cur>=1000?++count:count,0)
+console.log(numDeposite1000)
+
+// Prefixed ++ operator
+let a=10;
+console.log(++a)
+console.log(a)
+
+// 3.
+// const sums=accounts.flatMap(acc=>acc.movements).reduce((sums,cur)=>{
+const {deposits,withdrawals}=accounts.flatMap(acc=>acc.movements).reduce((sums,cur)=>{
+  // cur > 0 ? sums.deposits+=cur:sums.withdrawals+=cur;
+  sums[cur>0?'deposits':'withdrawals']+=cur;
+  return sums;
+},{deposits: 0, withdrawals:0})
+// console.log(sums)
+console.log(deposits,withdrawals)
+
+// 4.
+// this is a nice title -> THis Is a Nice Title
+const convertTitleCase=function(title){                               // defines a function convertTitleCase.Takes parameter title -> a string( the sentence we want to convert to title case)
+  const capitalize=str=>str[0].toUpperCase()+str.slice(1);     //str[0]->first character of the word. str,slice(1) -> takes the rest of te word starting from index 1
+  const exceptions=['a','an','the','and','but','or','on','in','with'];
+      const titleCase = title
+      .toLowerCase()
+      .split(' ')
+      .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+      .join(' ');
+                                   
+  return capitalize(titleCase)
+}
+console.log(convertTitleCase('this is a nice title'))
+console.log(convertTitleCase('this is a LONG title , but not too long'))
+console.log(convertTitleCase('and here is another title with an EXAMPLE'))
+*/
+
+
+////////////////////////////////////////
+// Coding Challenge #5
+
+/* 
+Julia and Kate are still studying dogs. This time they are want to figure out if the dogs in their are eating too much or too little food.
+
+- Formula for calculating recommended food portion: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
+- Eating too much means the dog's current food portion is larger than the recommended portion, and eating too little is the opposite.
+- Eating an okay amount means the dog's current food portion is within a range 10% above and below the recommended portion (see hint).
+
+YOUR TASKS:
+1. Loop over the array containing dog objects, and for each dog, calculate the recommended food portion (recFood) and add it to the object as a new property. Do NOT create a new array, simply loop over the array (We never did this before, so think about how you can do this without creating a new array).
+2. Find Sarah's dog and log to the console whether it's eating too much or too little. HINT: Some dogs have multiple users, so you first need to find Sarah in the owners array, and so this one is a bit tricky (on purpose) 🤓
+3. Create an array containing all owners of dogs who eat too much (ownersTooMuch) and an array with all owners of dogs who eat too little (ownersTooLittle).
+4. Log a string to the console for each array created in 3., like this: "Matilda and Alice and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat too little!"
+5. Log to the console whether there is ANY dog eating EXACTLY the amount of food that is recommended (just true or false)
+6. Log to the console whether ALL of the dogs are eating an OKAY amount of food (just true or false)
+7. Create an array containing the dogs that are eating an OKAY amount of food (try to reuse the condition used in 6.)
+8. Group the dogs into the following 3 groups: 'exact', 'too-much' and 'too-little', based on whether they are eating too much, too little or the exact amount of food, based on the recommended food portion.
+9. Group the dogs by the number of owners they have
+10. Sort the dogs array by recommended food portion in an ascending order. Make sure to NOT mutate the original array!
+
+HINT 1: Use many different tools to solve these challenges, you can use the summary lecture to choose between them 😉
+HINT 2: Being within a range 10% above and below the recommended portion means: current > (recommended * 0.90) && current < (recommended * 1.10). Basically, the current portion should be between 90% and 110% of the recommended portion.
+*/
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John', 'Leo'] },
+  { weight: 18, curFood: 244, owners: ['Joe'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+// 1.
+dogs.forEach(dog=> dog.recFood=Math.floor(dog.weight**0.75*28))
+console.log(dogs)
+
+// 2.
+const dogSarah=dogs.find(dog=>dog.owners.includes("Sarah"));
+console.log(`Sarah's dog eats too ${dogSarah.curFood>dogSarah.recFood?'much':'little'}`)
+
+// 3.
+const ownersTooMuch=dogs.filter(dog=>dog.curFood>dog.recFood).flatMap(dog=>dog.owners);
+console.log(ownersTooMuch)
+const ownersTooLittle=dogs.filter(dog=>dog.curFood<dog.recFood).flatMap(dog=>dog.owners);
+console.log(ownersTooLittle)
+
+// 4.
+console.log(`${ownersTooMuch.join(' and ')}'s dogs are eating too much`)
+console.log(`${ownersTooLittle.join(' and ')}'s dogs are eating too much`)
+
+// 5.
+console.log(dogs.some(dog=>dog.curFood===dog.recFood))
+
+// 6.
+const checkEatingOkay=dog=>dog.curFood<dog.recFood*1.1 && dog.curFood>dog.recFood*0.9
+console.log(dogs.every(checkEatingOkay))
+
+// 7.
+const dogsEatingOkay = dogs.filter(checkEatingOkay)
+console.log(dogsEatingOkay)
+
+// 8.
+const dogsGroupedByPortion=Object.groupBy(dogs, dog=> {
+  if(dog.curFood>dog.recFood){
+    return 'too-much'
+  }else if(dog.curFood<dog.recFood){
+    return 'too-little'
+  }else{
+    return 'exact'
+  }
+})
+console.log(dogsGroupedByPortion)
+
+// 9.
+const dogsGroupedByOwners=Object.groupBy(dogs,dog=>`${dog.owners.length}-owners`);
+console.log(dogsGroupedByOwners)
+
+// 10.
+const dogsSorted=dogs.toSorted((a,b)=> b.recFood-a.recFood)
+console.log(dogsSorted)
