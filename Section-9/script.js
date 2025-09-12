@@ -958,5 +958,3 @@ const[[,rating],[,ratingsCount]]=ratings;
 const ratingStars = [63405, 1808];
 const [fiveStarRatings, oneStarRatings, threeStarRatings = 0] = ratingStars;
 console.log(fiveStarRatings, oneStarRatings, threeStarRatings )*/
-
-
