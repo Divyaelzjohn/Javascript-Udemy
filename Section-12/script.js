@@ -124,7 +124,7 @@ const displayMovements = function (acc, sort = false) {
 
     const type = movement > 0 ? 'deposit' : 'withdrawal';
 
-    const date= new Date(acc.movementDate);
+    const date= new Date(movementDate);
     // const date= new Date(acc.movementsDates[i]);
     // const day=`${date.getDate()}`.padStart(2,0);
     // const month=`${date.getMonth()+1}`.padStart(2,0);
@@ -391,7 +391,7 @@ btnClose.addEventListener('click', function (e) {
 
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
-  e.preventDefault();
+  e.preventDefault();a
   displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });

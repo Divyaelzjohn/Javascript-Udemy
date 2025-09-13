@@ -19,7 +19,7 @@ const closeModal = function () {
   overlay.classList.add('hidden');
 };
 
-// btnsOpenModal[i].forEach(btn=>btn.addEventListener('click', openModal))
+btnsOpenModal[i].forEach(btn=>btn.addEventListener('click', openModal))
 
 // for (let i = 0; i < btnsOpenModal.length; i++)
 //   btnsOpenModal[i].addEventListener('click', openModal);
@@ -33,8 +33,8 @@ document.addEventListener('keydown', function (e) {
   }
 }); 
 
-
-////////////////////////////////////////////////
+/*
+///////////////////////////////////////////////
 console.log(document.documentElement)
 console.log(document.head)
 
@@ -275,3 +275,4 @@ window.addEventListener('beforeunload', function (e) {
   console.log(e);
   e.returnValue = '';
 });
+*/
