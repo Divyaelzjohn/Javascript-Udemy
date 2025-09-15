@@ -21,6 +21,8 @@
           alt="Bankist logo"
           class="nav__logo"
           id="logo"
+          designer="Jonas"
+          data-version-number="3.0"
         />
         <ul class="nav__links">
           <li class="nav__item">
@@ -41,7 +43,8 @@
       </nav>
 
       <div class="header__title">
-        <h1>
+        <!-- <h1 onclick="alert('HTML alert')"> -->
+          <h1>
           When
           <!-- Green highlight effect -->
           <span class="highlight">banking</span>
@@ -350,11 +353,12 @@
     </div>
     <div class="overlay hidden"></div>
 
-    <!-- <script src="script.js"></script> -->
+    <script src="script.js"></script>
   </body>
 </html>
 
 <!-- 
+What is the DOM?
 ->Allows us to make javascript interact with the browser;
 -We can write js to create , modify and delete HTML elements; set styles, classed and attributes; and listen and resoind to events;
 -DOM tree is generated from an HTML document , which we can then interact with;
@@ -375,5 +379,4 @@ HTMLButtonElement, HTMLDivElement(One diffrent type of HTMLElement per HTML elem
 Inheritance of methods and properties ->Any HTMLElement will have access to .addEventListener(), .cloneNode() or .closest() method
 
 Document -> .querySelector(), .createElement(), .getElementById()
-
 -->
