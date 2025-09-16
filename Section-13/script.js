@@ -233,41 +233,42 @@ allSections.forEach(function (section) {
 
 // Lazy loading images
 const imgTargets = document.querySelectorAll('img[data-src]');
+
 // console.log(imgTargets)
 
-const loadImg=function(entries,observer){
-  const [entry]=entries;
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
   console.log(entry)
   if (!entry.isIntersecting) return;
 
   // Replace src with data-src
-  entry.target.src=entry.target.dataset.src;
+  entry.target.src = entry.target.dataset.src;
 
-  entry.target.addEventListener('load',function(){
-    entry.target.classList.remove('lazy-img')
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
   });
-   
-  observer.unobserve(entry.target)
+
+  observer.unobserve(entry.target);
 };
 
-const imgObserver=new IntersectionObserver(loadImg,{
-  root:null, 
-  threshold:0,
-  rootMargin:'200px'
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
 });
 
 imgTargets.forEach(img => imgObserver.observe(img));
 
-
 // Slider
-const slider=function(){
-  const slides =document.querySelectorAll('.slide');
-  const btnLeft=document.querySelector('.slider__btn--left')
-  const btnRight=document.querySelector('.slider__btn--right')
-  const dotContainer =document.querySelector('.dots')
+const slider = function () {
+  const slides = document.querySelectorAll('.slide');
+  const btnLeft = document.querySelector('.slider__btn--left');
+  const btnRight = document.querySelector('.slider__btn--right');
+  const dotContainer = document.querySelector('.dots');
 
-  let curSlide=0;
-  const maxSlide=slides.length;
+  let curSlide = 0;
+  const maxSlide = slides.length;
 
   // const slider=document.querySelector('.slider')
   // slider.style.transform='scale(0.4) translateX(-800px)'
@@ -285,72 +286,81 @@ const slider=function(){
       );
     });
   };
+
   // createDots();
 
-  const activateDot=function(slide){
-    document.querySelectorAll('.dots__dot').forEach(dot=>dot.classList.remove('dots__dot--active'));
+  const activateDot = function (slide) {
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach(dot => dot.classList.remove('dots__dot--active'));
 
-    document.querySelector(`.dots__dot[data-slide="${slide}"]`)
-    .classList.add('dots__dot--active')
-  }
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`)
+      .classList.add('dots__dot--active');
+  };
 
   // activateDot(0)
 
-  const goToSlide=function(slide){
+  const goToSlide = function (slide) {
     slides.forEach(
-      (s,i)=>(s.style.transform=`translateX(${100*(i-slide)}%)`)
-    )
-  }
+      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    );
+  };
+
   // goToSlide(0)
 
   // Next slide
 
-  const nextSlide=function(){
-    if(curSlide===maxSlide-1){
-      curSlide=0;
-    }else{
+  const nextSlide = function () {
+    if (curSlide === maxSlide - 1) {
+      curSlide = 0;
+    } else {
       curSlide++;
     }
-    goToSlide(curSlide)
-    activateDot(curSlide)
-  }
 
-  const prevSlide=function(){
-    if(curSlide===0){
-      curSlide=maxSlide-1;
-    }else{
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  const prevSlide = function () {
+    if (curSlide === 0) {
+      curSlide = maxSlide - 1;
+    } else {
       curSlide--;
     }
-    goToSlide(curSlide)
-    activateDot(curSlide)
-  }
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
 
-  const init=function(){
-    goToSlide(0)
-    activateDot(0)
+  const init = function () {
+    goToSlide(0);
     createDots();
-  }
-  init()
+
+    activateDot(0);
+  };
+  init();
 
   // Event handler
-  btnRight.addEventListener('click',nextSlide)
-  btnLeft.addEventListener('click',prevSlide)
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', prevSlide);
 
-  document.addEventListener('keydown',function(e){
-    console.log(e);
-    if(e.key==='ArrowLeft') prevSlide();
-    e.key==='ArrowRight' && nextSlide();
-  })
+  document.addEventListener('keydown', function (e) {
+    // console.log(e);
+    if (e.key === 'ArrowLeft') prevSlide();
+    e.key === 'ArrowRight' && nextSlide();
+  });
 
-  dotContainer.addEventListener('click',function(e){
-    if(e.target.classList.contains('dots__dot')){
-      const {slide}=e.target.dataset;
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      // const {slide}=e.target.dataset;
+
+      curSlide = Number(e.target.dataset.slide);
       goToSlide(curSlide);
-      activateDot(curSlide)
+      activateDot(curSlide);
     }
-  })
+  });
 };
-slider()
+slider();
 // if(curSlide===maxSlide-1){
 //   curSlide=0;
 // }else{
@@ -571,18 +581,37 @@ console.log(h1.parentElement.children);
 // observer.observe(section1);
 
 
-// ///////////////////////////////////////
-// // Lifecycle DOM Events
-// document.addEventListener('DOMContentLoaded', function (e) {
-//   console.log('HTML parsed and DOM tree built!', e);
-// });
+///////////////////////////////////////
+// Lifecycle DOM Events
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built!', e);
+});
 
-// window.addEventListener('load', function (e) {
-//   console.log('Page fully loaded', e);
-// });
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded', e);
+});
 
 // window.addEventListener('beforeunload', function (e) {
 //   e.preventDefault();
 //   console.log(e);
-//   e.returnValue = '';
+//   e.returnValue = 'message';
 // });
+
+// DOMContentLoaded Event  
+// Load event
+// beforeunload Event
+
+
+// End of body
+// script sre fertched and executed after the HTML is completely parsed
+
+// Async in heaad
+// -script are fetched asynchornously and executed immediately
+// Usulally the DOMContentLoaded event waits for all scripts to execute, except for async scripts. So , DOMContentLoaded does not wait for an async script
+// Scripts not guaranteed to execute in order
+
+// Deffer 
+// -Scripta are fetched asynchornously and executed after the HTML is completely pared
+// DOMContentLoaded event fires after defer script is executed
+// Scripts are executed in order
+// This is overall the best solution . Use for your scripts , and when order matters(eg.including a library )
