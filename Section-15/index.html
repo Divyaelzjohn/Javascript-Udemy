@@ -12,19 +12,8 @@
     />
 
     <link rel="stylesheet" href="style.css" />
-
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-      crossorigin=""
-    />
-    <script
-      defer
-      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-      crossorigin=""
-    ></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <!-- <script defer src="other.js"></script> -->
     <script defer src="script.js"></script>
@@ -54,7 +43,6 @@
               placeholder="min"
             />
           </div>
-
           <div class="form__row">
             <label class="form__label">Cadence</label>
             <input
@@ -136,3 +124,62 @@
     <div id="map"></div>
   </body>
 </html>
+
+<!-- // User-Story:Description of the application's functionality from the users perspective
+// 1.As a user , i want to log my running workouts with location,distance, time , pace and steps/minute, so i can keep a log of all my running
+// As a user , I want to log my cycling workouts with location, distance, time ,speed andn elevation gain, so i can keep log of all my cycling
+// As a user , Iwant to see all my workouts at a galance, so I can easily track my progress over time
+// As a user, i want to also see my workouts on a map, so ican easily check where I work out the most
+// As a user, I want to see all my workouts when I leave the app and come back later , so that I can keep using there app over time
+
+
+// User stories 
+// 1] Log my running workouts with location, distance , time and step/minute 
+// Features
+/* Map where user clicks to add new workout(best way to get location coordinates) ,
+   Geolocation to display map at current loation(more user friendly),
+   Form to input distance, time ,pace,steps/minute
+*/
+
+// User stories 
+// 2] Log my cycling workouts with location, distance , time, speed and elevation gain
+// Features
+// Form to input distance,time , speed, elevation gain
+
+// User stories 
+// 3] See all my workouts at a glance
+// Features
+// Display all workouts in a list
+
+// User stories 
+// 4] See my workouts on a map
+// Features
+// Display all workouts in a list
+
+// User stories 
+// 5] See all my workouts when i leave the app and come back later
+// Features
+/* Store workout data in the browser using local storage API
+   On page load, read the saved data from local storage and display
+*/
+
+Architecture: Initial approch
+1] Log my running workouts with location, distance ,time, pace and steps / minutes (cadence)
+2] Log my cycling  workouts with location, distance, time , speeed and elevation gain
+
+Application control(Class App)
+The App class organizes the whole application:
+-Properties
+  -workouts:array to store all workout objects.
+  -map leaflet map Object
+-Methods(function inside the class)
+- constructor()-> runs automatically when app loads -> Trigger getPosition().
+-_getPosition()-> uses Geolocation API ->If success-> calls _loadsMap(position)
+-_loadMap(position)-> loads Leaflet map at user's location.
+-_showForm()-> display workout form when clicking on the map.
+-_toggleElevationField()-> switches input between candence(running) and elevation (cycling).
+-_newWorkout()-> heart of the app:
+  -creates a new Running or cycling object
+  -store it in workouts array.
+  -shows it on the map+list
+-->

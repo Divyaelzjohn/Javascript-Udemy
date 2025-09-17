@@ -21,6 +21,7 @@ let $function = 27;
 
 let person = "jonas";
 let PI = 3.1415;
+// written in upppercase because it's a constant-like value
 
 let myFirstJob = "Coder";
 let myCurrentJob = "Teacher";
@@ -36,12 +37,13 @@ let javascriptIsFun = true;
 console.log(javascriptIsFun);
 
 // console.log(typeof true);
-console.log(typeof javascriptIsFun);
+console.log(typeof javascriptIsFun);        
+
 // console.log(typeof 23);
 // console.log(typeof 'Jonas');
 
 javascriptIsFun = 'YES!';
-console.log(typeof javascriptIsFun);
+console.log(typeof javascriptIsFun);     //same variable but reassigned to a string, js is dynamicllay types -> variable can hold any type
 
 let year;
 console.log(year);
@@ -50,8 +52,26 @@ console.log(typeof year);
 year = 1991;
 console.log(typeof year);
 
-console.log(typeof null);
-
+console.log(typeof null);               // object
+/////////////////////////////////////
+/*
+diffrence betweeen let, const and var
+// var ->  works , but var us function-scoped(not block-scoped)
+  Function-scoped
+  Allow redeclaration
+  Hoisted
+  old style , not recommended
+// let   -> allowed reassignment
+  block-scoped({})
+  Cannot be redeclared in the same scope
+  Can be ressigned
+// const  ->canot reassign , must be initialized immediately
+   Block-scoped
+   Canot be redeclared
+   canot be reassigned
+   -Used for constants and values that should noy change
+*/
+/*
 ////////////////////////////////////
 // let, const and var
 let age = 30;
@@ -114,6 +134,7 @@ console.log(x, y);
 const averageAge = (ageJonas + ageSarah) / 2;
 console.log(ageJonas, ageSarah, averageAge);
 
+// Js has 7 primitive data types(number , string , boolean, undefined, null , symbol, bigint)
 /////////////////////////////////////
 
 */
@@ -161,7 +182,7 @@ console.log(jonasNew);
 
 console.log(`Just a regular string...`);
 
-console.log('String with \n\
+// console.log('String with \n\                  uses\n\ for line breaks , hard to read
 multiple \n\
 lines');
 
@@ -217,7 +238,7 @@ console.log(BMIMark, BMIJohn);
 if(BMIMark>BMIJohn){console.log("Mark's BMI is higher than John's!");console.log(`Mark's BMI ${BMIMark} is higher than John's ${BMIJohn}!`)}else{console.log(`John's  BMI ${BMIJohn} is higher than Mark's ${BMIMark}!`)}
 */
 /*
-// type conversion
+// type conversion -> Manuvally changing a value from one type to another [number, string]
 const inputYear = '1991';
 console.log(Number(inputYear), inputYear);
 console.log(Number(inputYear) + 18);
@@ -227,7 +248,7 @@ console.log(typeof NaN);
 
 console.log(String(23), 23);
 
-// type coercion
+// type coercion  -> JS automatically converts types when needed
 console.log('I am ' + 23 + ' years old');
 console.log('23' - '10' - 3);
 console.log('23' / '2');
@@ -249,14 +270,14 @@ console.log(Boolean(''));
 const money = 100;
 if (money) {
   console.log("Don't spend it all ;)");
-} else {
+}else {
   console.log('You should get a job!');
 }
 
 let height = 0;
 if (height) {
   console.log('YAY! Height is defined');
-} else {
+}else {
   console.log('Height is UNDEFINED');
 }
 
@@ -452,10 +473,6 @@ let tipValue1 = 15/100;
 let tipValue2 = 20/100;
 let tip = bill>50 && bill<300 ? bill*tipValue1 : bill*tipValue2;
 
-let totalValue = bill + tip;
-
+let totalValue = bill + ti
 console.log(`The bill was ${bill}, the tip was ${tip}, and the total Value is ${totalValue}`)
-
 */
-
-// 
