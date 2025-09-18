@@ -1,0 +1,23 @@
+{
+  "name": "javascript-udemy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Divyaelzjohn/Javascript-Udemy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Divyaelzjohn/Javascript-Udemy/issues"
+  },
+  "homepage": "https://github.com/Divyaelzjohn/Javascript-Udemy#readme",
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "lodash-es": "^4.17.21"
+  }
+}
