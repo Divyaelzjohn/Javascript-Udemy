@@ -30,6 +30,10 @@ createBooking('LH123', 5);
 
 createBooking('LH123', undefined, 1000);
 
+
+// function caller doest provide a value for numPassenger then js will automaticclay set it to 1 
+Without defaults, if you forget to pass a value, you get undefined.
+
 ///////////////////////////////////////
 */
 /*
