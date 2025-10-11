@@ -696,7 +696,7 @@ Promise.race([
 ]).then(res=>console.log(res[0]))
 .catch(err=>console.error(err))
 
-//Prmise.allSettled
+//Pormise.allSettled
 Promise.allSettled([
   Promise.resolve('Success'),
   Promise.reject('ERROR'),

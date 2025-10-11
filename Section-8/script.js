@@ -36,40 +36,41 @@ calcAge(1991);
 // printAge(); 
 */
 
-    /*var me = 'Jonas';
-    let job = 'teacher';
-    const year = 1991;
+/*  
+  var me = 'Jonas';
+  let job = 'teacher';
+  const year = 1991;
 
-    // Functions
-    console.log(addDecl(2, 3));
-    // console.log(addExpr(2, 3));
-    // console.log(addArrow(2, 3));
-    function addDecl(a,b){
-      return a+b;
-    }
-    const addExpr=function(a,b){
-      return a+b;
-    }
-    var addArrow=(a,b)=>a+b;
+  // Functions
+  console.log(addDecl(2, 3));
+  // console.log(addExpr(2, 3));
+  // console.log(addArrow(2, 3));
+  function addDecl(a,b){
+    return a+b;
+  }
+  const addExpr=function(a,b){
+    return a+b;
+  }
+  var addArrow=(a,b)=>a+b;
 
-    // Example 
-    console.log(undefined)
-    if (!numProducts) deleteShoppingCart();
+  // Example 
+  console.log(undefined)
+  if (!numProducts) deleteShoppingCart();
 
-    var numProducts = 10;
+  var numProducts = 10;
+  
+  function deleteShoppingCart() {
+    console.log('All products deleted!');
+  }
+
+  var x = 1;
+  let y = 2;
+  const z = 3;
+  console.log(x === window.x);
+  console.log(y === window.y);
+  console.log(z === window.z);
     
-    function deleteShoppingCart() {
-      console.log('All products deleted!');
-    }
-
-    var x = 1;
-    let y = 2;
-    const z = 3;
-    console.log(x === window.x);
-    console.log(y === window.y);
-    console.log(z === window.z);
-    
-  */
+*/
 
     /*
      console.log(this);
@@ -103,7 +104,7 @@ calcAge(1991);
     matilda.calcAge();
     const f=jonas.calcAge;
     f();
-    */
+  */
 
 /*
 // var firstName='Matilda'
@@ -204,14 +205,11 @@ jessicaClone.familiy.push('Mary');
 jessicaClone.familiy.push('John');
 
 
-console.log('Original:',jessica2)
-console.log('Clone:',jessicaCopy)
+console.log('Original:',jessica2);
+console.log('Clone:',jessicaCopy);
 */
 
 // Closure prototypal inheritance event loop 
-// 
-
-
 
 let myName="Divya"
 function outer(){

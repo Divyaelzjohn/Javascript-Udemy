@@ -1,16 +1,17 @@
-import cloneDeep from 'lodash-es/cloneDeep.js';
+// import cloneDeep from 'lodash-es/cloneDeep.js';
 
-const state = {
-  cart: [
-    { product: 'bread', quantity: 5 },
-    { product: 'pizza', quantity: 5 },
-  ],
-  user: { loggedIn: true },
-};
-const stateClone = Object.assign({}, state);
-const stateDeepClone = cloneDeep(state);
+// const state = {
+//   cart: [
+//     { product: 'bread', quantity: 5 },
+//     { product: 'pizza', quantity: 5 },
+//   ],
+//   user: { loggedIn: true },
+// };
+// const stateClone = Object.assign({}, state);
+// const stateDeepClone = cloneDeep(state);
 
-state.user.loggedIn = false;
-console.log(stateClone);
+// state.user.loggedIn = false;
+// console.log(stateClone);
 
-console.log(stateDeepClone);
+// console.log(stateDeepClone);
+

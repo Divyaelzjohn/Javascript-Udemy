@@ -125,7 +125,7 @@ Arrow Function->Great for a quick one-line functions.Has no this keyword
       Parametrs:placeholder to recive input values .Like local varable of a function 
       Function body:block of code that we want to reuse .Process the function's input data 
       return Statement- to output a value from the function and terminate execution 
-      Variables 0to save returned value(function output)
+      Variables 0 to save returned value(function output)
       Arguments-Actual values of function parameters , to input data
       calling,running or invokking the function ,using()
 

@@ -904,7 +904,7 @@ const{fri:{open:o,close:c},}=openingHours;
 console.log(o,c )
 */
 /////////////////////////////////////////////////////////////////
-// Destructure Arraya
+// Destructure Array
 /*const arr=[2,3,4];
 const a=arr[0];
 const b=arr[1];

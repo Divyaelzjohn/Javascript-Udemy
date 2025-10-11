@@ -70,6 +70,7 @@ newPassport(jonas);
 checkIn(flight, jonas);
 */
 // Higher order function?a higher-order function[HOF] ia a function that takes another function as an argumnets(callback),Or returns another function
+// A callback function = the function that you pass into another function, so that it can be “called back” later.
 
 /* // Remove spaces + lowercase
 function oneWord(str) {
